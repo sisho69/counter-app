@@ -31,8 +31,8 @@ const reset = () => (count.value = 0)
     <div class="counter-box">
       <p class="count">{{ count }}</p>
       <div class="buttons">
-        <button @click="changeCount(-1)">-</button>
-        <button @click="changeCount(1)">+</button>
+        <button @click="increment(-1)">-</button>
+        <button @click="decrement(1)">+</button>
       </div>
     </div>
   </div>
