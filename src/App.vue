@@ -14,54 +14,35 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 const count = ref(0)
 
 // 起動時にサーバーのカウンター値を取得
-onMounted(async () => {
-  try {
-    const res = await fetch(`http://localhost:3000/api/counter`)
-    const data = await res.json()
-    count.value = data.value
-  } catch (err) {
-    console.error('初期値取得エラー:', err)
+onMounted(() => {
+  const saved = localStorage.getItem('count')
+  if (saved !== null) {
+    count.value = parseInt(saved, 10)
   }
 })
 
-// カウント変更(サーバー連動)
-const changeCount = async (amount) => {
-  try {
-    const endpoint = amount > 0 ? 'increment' : 'decrement'
-    const res = await fetch(`http://localhost:3000/api/${endpoint}`, { method: 'POST' })
-    const data = await res.json()
-    count.value = data.value
-  } catch (err) {
-    console.error('通信エラー:', err)
-  }
-}
+// 値が変わるたびに保存
+watch(count, (newVal) => {
+  localStorage.setItem('count', newVal)
+})
+
+// 操作
+const increment = () => count.value++
+const decrement = () => count.value--
+const reset = () => (count.value = 0)
 </script>
 
 <style>
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  font-family: 'segoe UI', sans-serif;
-  color: #000;
-  background-color: #ffff;
-}
-
-.counter-box {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
 .count {
   font-size: 3rem;
   margin: 10px 0;
+  color: #000;
+  background-color: #ffff;
 }
 
 .buttons button {
