@@ -1,24 +1,10 @@
-<template>
-  <div class="container">
-    <!-- タイトル-->
-    <h1>カウンター</h1>
-
-    <div class="counter-box">
-      <p class="count">{{ count }}</p>
-      <div class="buttons">
-        <button @click="changeCount(-1)">-</button>
-        <button @click="changeCount(1)">+</button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 
+// カウンターの値
 const count = ref(0)
 
-// 起動時にサーバーのカウンター値を取得
+// 起動時にlocalStorageからカウンター値を取得
 onMounted(() => {
   const saved = localStorage.getItem('count')
   if (saved !== null) {
@@ -37,17 +23,43 @@ const decrement = () => count.value--
 const reset = () => (count.value = 0)
 </script>
 
+<template>
+  <div class="container">
+    <!-- タイトル-->
+    <h1>カウンター</h1>
+
+    <div class="counter-box">
+      <p class="count">{{ count }}</p>
+      <div class="buttons">
+        <button @click="changeCount(-1)">-</button>
+        <button @click="changeCount(1)">+</button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style>
+.container {
+  text-align: center;
+  margin-top: 100px;
+  background-color: white;
+  color: black;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 .count {
   font-size: 3rem;
-  margin: 10px 0;
-  color: #000;
-  background-color: #ffff;
+  margin: 20px 0;
 }
 
 .buttons button {
   margin: 5px;
   padding: 10px 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 </style>
