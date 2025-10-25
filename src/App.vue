@@ -57,10 +57,47 @@ const reset = () => (count.value = 0)
   margin: 20px 0;
 }
 
+/*ボタン*/
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .buttons button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  flex: 1 1 30%;
+  min-width: 80px;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  background-color: #0078d7;
+  color: white;
+  transition: 0.2s;
+}
+
+.buttons button:hover {
+  background-color: #005fa3;
+}
+
+/*スマホ対応*/
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .count {
+    font-size: 2.5rem;
+  }
+
+  .buttons .button {
+    font-size: 1rem;
+    min-width: 70px;
+    padding: 10px 0;
+  }
 }
 </style>
