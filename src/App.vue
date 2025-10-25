@@ -32,8 +32,8 @@ const reset = () => (count.value = 0)
       <p class="count">{{ count }}</p>
       <div class="buttons">
         <button @click="decrement">-</button>
-        <button @click="reset">リセット</button>
         <button @click="increment">+</button>
+        <button @click="reset">リセット</button>
       </div>
     </div>
   </div>
